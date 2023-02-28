@@ -16,10 +16,13 @@ def login():
 		delete the remaining code *in this function* and replace it with
 		your own code. add more code to do what the assignment asks of you.
 	"""
-
-    emailAddress = input("Please enter an e-mail to inicialited the app: ")
     arroba = '@'
+    space = " "
+    emailAddress = input("Please enter an e-mail to inicialited the app: ")
+    lowerEmail = emailAddress.lower()
 
-    if arroba not in emailAddress:
+    if arroba not in lowerEmail or space in lowerEmail:
         print("E-mail adress no valid, please try again")
-        return emailAddress
+    else:
+        return lowerEmail
+        print(lowerEmail)

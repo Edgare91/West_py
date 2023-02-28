@@ -41,7 +41,7 @@ def gpsValue(x, y, sat):
     """
 
 	"""
-    pathToJSONDataFiles = "C:/Users/jerom/GitHub/evc-cit134a-python/gladys-west-map/data"
+    pathToJSONDataFiles = "/Users/Edgar/Documents/GitHub/West_py/src"
 
     # read the satellite data
     data = readSat(sat, pathToJSONDataFiles)

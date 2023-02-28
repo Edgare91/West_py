@@ -12,71 +12,83 @@ import gladysUserLogin as userLogin
 
 
 def runTests():
-	"""
-		tests some module functions
-	"""
+    """
+            tests some module functions
+    """
 
-	print("running a few tests")
+    print("running a few tests")
 
-	average = compute.gpsAverage(4, 5)
-	print("average = ", average)
+    average = compute.gpsAverage(4, 5)
+    print("average = ", average)
 
-	# delete the remaining code *in this function* and replace it with
-	# your code. add more code to do what the assignment asks you to do.
-	# add 3 more tests of different functions in different modules
-	print("hello!")
+    # delete the remaining code *in this function* and replace it with
+    # your code. add more code to do what the assignment asks you to do.
+    # add 3 more tests of different functions in different modules
+    print("hello!")
 
 
 def start():
-	"""
-		logs the user in, and runs the app
-	"""
+    """
+            logs the user in, and runs the app
+    """
 
-	userName = userLogin.login()
+    userName = userLogin.login()
 
-	runApp(userName)
+    runApp(userName)
 
 
 def runApp(userName):
-	"""
-		runs the app
-	"""
+    """
+            runs the app
+    """
 
-	# loop until user types q
-	userQuit = False
-	while (not userQuit):
+    # loop until user types q
+    userQuit = False
+    while (not userQuit):
 
-		# menu
-		"""
-			here student needs to print their own menu. or, to do better, 
-			create a function to print your menu and simply call it here.
-		"""
-		print("-- Welcome to the Gladys West Map App --")
-		print("Type t to run tests or q to quit")
-		print()
+        # menu
+        """
+                here student needs to print their own menu. or, to do better, 
+                create a function to print your menu and simply call it here.
+        """
+        print("\n-- Welcome to the Gladys West Map App --")
+        print(''' 
+1.- Type "C" to set current position
+2.- Type "D" to set destination position
+3.- Type "M" to map – which tells the distance
+4.- Type "T" to run module tests
+5.- Type "Q" to quit
+		''')
+        print()
 
-		# get first character of input
-		userInput = input("Enter a command:")
-		lowerInput = userInput.lower()
-		firstChar = lowerInput[0:1]
+        # get first character of input for the menu
+        userInput = input("Enter a command: ")
+        lowerInput = userInput.lower()
+        firstChar = lowerInput[0:1]
 
-		# menu choices, use a switch-like if-elif control structure
+        # menu choices, use a switch-like if-elif control structure
 
-		"""
+        """
 			here students need to change and add to this code to
 			handle their menu options
 		"""
-		# quit
-		if firstChar == 'q':
-			userQuit = True
+        # quit
+        if firstChar == 'q':
+            userQuit = True
 
-		# run some tests (this is part 1 of 2)
-		elif firstChar == 't':
-			runTests()
+        # run some tests (this is part 1 of 2)
+        elif firstChar == 'C':
+            runTests()
+        elif firstChar == 't':
+            runTests()
+        elif firstChar == 't':
+            runTests()
+        elif firstChar == 't':
+            runTests()
 
-		else:
-			print("ERROR: " + firstChar + " is not a valid command")
+        else:
+            print("ERROR: " + firstChar + " is not a valid command")
 
-	print("\n")
-	print("Thank you for using the Gladys West Map App!")
-	print("\n")
+    print("\n")
+    print("Thank you for using the Gladys West Map App!")
+    print("\n")

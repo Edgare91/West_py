@@ -1,15 +1,25 @@
 import io
 
 """
-	Student: Edgar Nunez
+	Student: Gabriel Solomon
 	Module: gladysUserLogin
-	Description: This module allows or denied the access to the app depending if the user enter
-	a correct email adress
+	Description: This module does …
 """
-
-# Login, email and a password requiered to proced to the features app
 
 
 def login():
-    email = input("Please enter your email adress: ")
-    password = input("Please enter your password: ")
+    """
+            document your function definition here. what does it do?
+    """
+
+    """
+		delete the remaining code *in this function* and replace it with
+		your own code. add more code to do what the assignment asks of you.
+	"""
+
+    emailAddress = input("Please enter an e-mail to inicialited the app: ")
+    arroba = '@'
+
+    if arroba not in emailAddress:
+        print("E-mail adress no valid, please try again")
+        return emailAddress

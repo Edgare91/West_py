@@ -8,29 +8,29 @@ import gladysUserLogin as userLogin
 	Module: gladysUserInterface
 	Description: This module does the interface and is like the glue to put all the modules working
     together / Also, it contains the menu and the runTests Function //
-"""
 
 
-def runTests():
-    """
+
+    def runTests():
+
             tests some module functions
-    """
+
 
     print("running a few tests")
 
     average = compute.gpsAverage(4, 5)
     print("average = ", average)
 
-    # delete the remaining code *in this function* and replace it with
-    # your code. add more code to do what the assignment asks you to do.
-    # add 3 more tests of different functions in different modules
-    print("hello!")
+     delete the remaining code *in this function* and replace it with
+     your code. add more code to do what the assignment asks you to do.
+     add 3 more tests of different functions in different modules
+    print("hello!") 
+
+"""
 
 
 def start():
-    """
-    Start the whole app
-
+    """ Starts the app getting the userName from the login module (lowerEmail)
     """
     global userName
     userName = userLogin.login()
@@ -40,17 +40,18 @@ def start():
 
 def runApp(userName):
     """
-            runs the app
+    Boddy of the app / Menu / Switches cases
     """
 
     # loop until user types q
     userQuit = False
+    # While userQuit not True still printing the Menu
     while (not userQuit):
 
-        # menu
         """
                 create a function to print your menu and simply call it here.
         """
+
         print("\n--| Welcome to the Gladys West Map App |--")
         print("         User: "+userName)
         print('''\n
@@ -59,7 +60,6 @@ def runApp(userName):
 3.- Type "M" to calculate the distance between current & destination position
 4.- Type "Q" to quit
 		''')
-        # 4.- Type "T" to run module tests
         print()
 
         # get first character of input for the menu
@@ -77,7 +77,6 @@ def runApp(userName):
         if firstChar == 'q':
             userQuit = True
 
-       # run some tests (this is part 1 of 2)
         elif firstChar == 'c':
 
             """ Current Position
@@ -176,19 +175,12 @@ def runApp(userName):
             except UnboundLocalError:
                 line = f"\n--------------------------------------------------------------"
                 print(line)
-                print("\nPlease enter first current location, second final destination \nand finally select the option to calculate distance. Please")
+                print("\nPlease enter first current location, second final destination \nand finally select the option to calculate distance. \nPlease try again")
                 print(line)
                 runApp(userName)
 
             print(distanceString)
             print(line)
-
-        elif firstChar == 't':
-            runTests()
-        elif firstChar == 't':
-            runTests()
-        elif firstChar == 't':
-            runTests()
 
         else:
             print("ERROR: " + firstChar + " is not a valid command")

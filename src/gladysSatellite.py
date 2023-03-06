@@ -19,20 +19,17 @@ def readSat(sat, pathToJSONDataFiles):
         pathToJSONDataFiles: Location of JSON file.
 
     Raises:
-        IOError: "It is an error raised when an input/output operation fails, such as the print 
+        IOError: "It is an error raised when an input/output operation fails, such as the print
         statement or the open() function when trying to open a file that does not exist."
 
     Returns:
         data = The content of the JSON files.
     """
 
-    # data file path
     fileName = sat + "-satellite.json"
-
-    # print("filePath = ", filePath)
     filePath = pathToJSONDataFiles + "/" + fileName
 
-    # open the file
+   # open the file
     try:
         fileHandle = open(filePath)
     except IOError:

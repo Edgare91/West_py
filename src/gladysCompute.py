@@ -1,23 +1,22 @@
-import io
+import math
 import gladysSatellite as satellite
 import gladysUserInterface
-import math
 # math.sqrt(x) Return the square root of x.
 
 
 """
-	Student: Edgar Nunez
-	Module: gladysCompute
-	Description: This module does the matemathical operations for Average and the formula
-    for the distance. After getting the SUM of the Gps Values comming from the Stellite
-    Module.
-
+Student: Edgar Nunez
+Module: gladysCompute
+Description: This module does the matemathical operations
+             for Average and the formula for the distance.
+             After getting the SUM of the Gps Values comming
+             from the Stellite Module.
 """
 
 
 def gpsInitialAverage():
-    """Function that determines the averege gps data from the INITIAL point ('C')
-       coming from the interface.
+    """Function that determines the averege gps data from 
+    the INITIAL point ('C') coming from the interface.
 
     Returns:
         Average of the INICIAL values (SUM of the 4 satellites / 4)
@@ -82,9 +81,9 @@ def gpsFinalAverage():
 
     except ImportError:
 
-        line = f"\n---------------------------------------------------------------------------"
         print(line)
-        print("\nYou need to enter a FINAL destination coordenates in order to calculate the distance.\nPlease try again. ")
+        print("You need to enter a FINAL destination coordenates in order to calculate the distance.")
+        print("Please try again. ")
         print(line)
 
         from gladysUserInterface import userName
@@ -92,11 +91,14 @@ def gpsFinalAverage():
 
 
 def distance():
-    """Function that determines the distance between inicial and final coordenates.
+    """Function that determines the distance between
+    inicial and final coordenates.
 
     Args:
-        gpsInitialAverage: Initial avereged of the SUM of all satellites for Initial Point
-        gpsFinalAverage: Final avereged of the SUM of all satellites for Final Point
+        gpsInitialAverage: Initial avereged of the SUM of
+                           all satellites for Initial Point
+        gpsFinalAverage: Final avereged of the SUM of
+                         all satellites for Final Point
 
     Returns:
         Distance between Inicial and Final Average .

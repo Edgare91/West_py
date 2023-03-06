@@ -11,6 +11,12 @@ import re
 
 
 def login():
+    """Function which convert the input email in lower case / 
+       If the email is correct, then it asks for the password / 
+
+    Returns:
+        userName
+    """
 
     while True:
 
@@ -27,18 +33,15 @@ def login():
     return lowerEmail  # = userName
 
 
-'''
-Regular expressions (called REs, or regexes, or regex patterns) are essentially a tiny, highly 
-specialized programming language embedded inside Python and made available through the re module. 
-Using this little language, you specify the rules for the set of possible strings that you want to match;
-this set might contain English sentences, or e-mail addresses, or TeX commands, or anything you like. 
-
-'''
-
-
 def is_valid_email(lowerEmail):
     """ Function to valid if a email is correct. Using regular expressios for get the possible ch in 
-    the correct position, the function also works to validate if there is a "@" and a dot (.)
+    the correct position, the function also works to validate if there is a "@" and a dot (.) // 
+
+    Regular expressions (called REs, or regexes, or regex patterns) are essentially a tiny, highly 
+    specialized programming language embedded inside Python and made available through the re module. 
+    Using this little language, you specify the rules for the set of possible strings that you want to match;
+    this set might contain English sentences, or e-mail addresses, or TeX commands, or anything you like. 
+
 
     Args:
         lowerEmail: _email input already passed to lower case_

@@ -1,7 +1,6 @@
 import io
 
 import gladysCompute as compute
-import gladysSatellite as satellite
 import gladysUserLogin as userLogin
 
 """
@@ -33,7 +32,7 @@ def start():
     Start the whole app
 
     """
-
+    global userName
     userName = userLogin.login()
 
     runApp(userName)
@@ -57,16 +56,17 @@ def runApp(userName):
         print('''\n
 1.- Type "C" to set current position
 2.- Type "D" to set destination position
-3.- Type "M" to map – which tells the distance
-4.- Type "T" to run module tests
-5.- Type "Q" to quit
+3.- Type "M" to calculate the distance between current & destination position
+4.- Type "Q" to quit
 		''')
+        # 4.- Type "T" to run module tests
         print()
 
         # get first character of input for the menu
         userInput = input("Enter a command: ")
         lowerInput = userInput.lower()
         firstChar = lowerInput[0:1]
+
         global x1
         global y1
         global x2
@@ -74,22 +74,14 @@ def runApp(userName):
         global sumInitialSat
         global sumFinalSat
 
-        # menu choices, use a switch-like if-elif control structure
-
-        """
-			here students need to change and add to this code to
-			handle their menu options
-		"""
-        # quit
         if firstChar == 'q':
             userQuit = True
 
        # run some tests (this is part 1 of 2)
         elif firstChar == 'c':
 
-            """_summary_
-
-            1.- Type "C" to set current position //
+            """ Current Position
+             Type "C" to set current position //
             (x1,y1) values can only be from 0 to 99
             values can only be integer values (whole numbers) //
             output: if input is out of range "Value of out range, please try again"
@@ -120,32 +112,17 @@ def runApp(userName):
                 except:
                     print("Invalid value, please enter a whole number")
 
-            altitude = satellite.gpsInitialValue(x1, y1, 'altitude')
+            line = f"\n------------------------------------------"
+            print(line)
 
-            # altitud = satValue
+            currentString = f"\n   Your current position is X= {x1}, Y={y1}"
 
-            latitude = satellite.gpsInitialValue(x1, y1, 'latitude')
-            # latitude = satValue
-
-            longitude = satellite.gpsInitialValue(x1, y1, 'longitude')
-            # longitude = satValue
-
-            time = satellite.gpsInitialValue(x1, y1, 'time')
-            # time = satValue
-
-            sumInitialSat = (altitude + latitude + longitude + time)
-
-            print(sumInitialSat)
-
-            global initialAverage
-
-            initialAverage = compute.gpsInitialAverage()
-
-        # runTests()
+            print(currentString)
+            print(line)
 
         elif firstChar == 'd':
 
-            """_summary_
+            """Destination position
 
             2.- Type "D" to set destination position //
             (x2,y2) values can only be from 0 to 99
@@ -177,29 +154,34 @@ def runApp(userName):
                 except:
                     print("Invalid value, please enter a whole number")
 
-            altitude = satellite.gpsFinalValue(x2, y2, 'altitude')
+            line = f"\n------------------------------------------"
 
-            # altitud = satValue
+            print(line)
 
-            latitude = satellite.gpsFinalValue(x2, y2, 'latitude')
-            # latitude = satValue
+            destinationString = f"\nYour destination position is X= " + \
+                str(x2)+", Y= "+str(y2)
 
-            longitude = satellite.gpsFinalValue(x2, y2, 'longitude')
-            # longitude = satValue
-
-            time = satellite.gpsFinalValue(x2, y2, 'time')
-            # time = satValue
-
-            sumFinalSat = int(altitude + latitude + longitude + time)
-
-            print(sumFinalSat)
-
-            global finalAverage
-
-            finalAverage = compute.gpsFinalAverage()
+            print(destinationString)
+            print(line)
 
         elif firstChar == 'm':
-            compute.distance()
+
+            distance = compute.distance()
+            distanceString = f"\n        The distance is: {round(distance, 2)}"
+
+            print(line)
+            try:
+                print(currentString)
+                print(destinationString)
+            except UnboundLocalError:
+                line = f"\n--------------------------------------------------------------"
+                print(line)
+                print("\nPlease enter first current location, second final destination \nand finally select the option to calculate distance. Please")
+                print(line)
+                runApp(userName)
+
+            print(distanceString)
+            print(line)
 
         elif firstChar == 't':
             runTests()

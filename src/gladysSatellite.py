@@ -1,6 +1,6 @@
 import io
 import json
-import gladysUserInterface as userInterface
+import gladysUserInterface
 """
 	Student: Edgar Nunez
 	Module: gladysSatellite
@@ -12,9 +12,18 @@ information into data structures. Returns the data that was read to the gladysUs
 
 
 def readSat(sat, pathToJSONDataFiles):
-    """
-            reads satellite data from a json file
-            Students do NOT need to change the readSat function.
+    """Function that read the JSON files.
+
+    Args:
+        sat: Name of JSON file satellite.
+        pathToJSONDataFiles: Location of JSON file.
+
+    Raises:
+        IOError: "It is an error raised when an input/output operation fails, such as the print 
+        statement or the open() function when trying to open a file that does not exist."
+
+    Returns:
+        data = The content of the JSON files.
     """
 
     # data file path
@@ -37,28 +46,22 @@ def readSat(sat, pathToJSONDataFiles):
 
 
 def gpsInitialValue(x, y, sat):
-    """_summary_ Function that returns the values matching in the 4 satelites
-        [altitude,latitud, longitud, time ]
+    """Function that returns the values matching in the 4 satelites
+    [altitude,latitud, longitud, time ] for the initial coordenates ('C')
 
-        Args:
-            x: _Coordenade in x axis for initial and final point_
-            y: _Coordenate in y axis for initial and final point
-            sat: _Name of satelite
+    Args:
+        x: _Coordenade in x axis for the INITIAL point_
+        y: _Coordenate in y axis for the INITIAL point
+        sat: _Name of satelite
 
-        Returns:
-            SUM of the 4 values previously matching from 4 Jsons file
-        """
+    Returns:
+        The 4 matching satellites values with the input for the current location 
+    """
 
     pathToJSONDataFiles = "/Users/Edgar/Documents/GitHub/West_py/src"
 
     # read the satellite data
     data = readSat(sat, pathToJSONDataFiles)
-
-    """
-
-
-
-	"""
 
     valueDictionary = {}
 
@@ -76,16 +79,21 @@ def gpsInitialValue(x, y, sat):
 
 
 def gpsFinalValue(x, y, sat):
+    """Function that returns the values matching in the 4 satelites
+    [altitude,latitud, longitud, time ] for the FINAL coordenates ('D')
+
+    Args:
+        x: _Coordenade in x axis for the FINAL point_
+        y: _Coordenate in y axis for the FINAL point
+        sat: _Name of satelite
+
+    Returns:
+        The 4 matching satellites values with the input for the destination location 
+    """
     pathToJSONDataFiles = "/Users/Edgar/Documents/GitHub/West_py/src"
 
     # read the satellite data
     data = readSat(sat, pathToJSONDataFiles)
-
-    """
-
-
-
-	"""
 
     valueDictionary = {}
 

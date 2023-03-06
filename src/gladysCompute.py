@@ -1,7 +1,9 @@
 import io
-
+import gladysSatellite as satellite
+import gladysUserInterface
 import math
 # math.sqrt(x) Return the square root of x.
+
 
 """
 	Student: Edgar Nunez
@@ -9,61 +11,103 @@ import math
 	Description: This module does the matemathical operations for Average and the formula
     for the distance. After getting the SUM of the Gps Values comming from the Stellite
     Module.
+
 """
 
 
 def gpsInitialAverage():
-    """
-            document your function definition here. what does it do?
+    """Function that determines the averege gps data from the INITIAL point ('C')
+       coming from the interface.
+
+    Returns:
+        Average of the INICIAL values (SUM of the 4 satellites / 4)
     """
 
-    """
-		delete the remaining code *in this function* and replace it with
-		your own code. add more code to do what the assignment asks of you.
-	"""
-    from gladysUserInterface import sumInitialSat
+    try:
+        from gladysUserInterface import x1, y1
 
-    average = sumInitialSat / 4
+        altitude = satellite.gpsInitialValue(x1, y1, 'altitude')
 
-    print(average)
-    return average
+        latitude = satellite.gpsInitialValue(x1, y1, 'latitude')
+
+        longitude = satellite.gpsInitialValue(x1, y1, 'longitude')
+
+        time = satellite.gpsInitialValue(x1, y1, 'time')
+
+        sumInitialSat = (altitude + latitude + longitude + time)
+
+        global average
+
+        average = sumInitialSat / 4
+
+        return average
+
+    except ImportError:
+        line = f"\n---------------------------------------------------------------------------"
+        print(line)
+        print("\nYou need to enter a CURRENT coordenates in order to calculate the distance. \nPlease try again. ")
+        print(line)
+        from gladysUserInterface import userName
+        gladysUserInterface.runApp(userName)
 
 
 def gpsFinalAverage():
-    """
-            document your function definition here. what does it do?
-    """
+    """Function that determines the averege gps data from the FINAL point ('D')
+       coming from the interface.
 
+    Returns:
+        Average of the FINAL values (SUM of the 4 satellites / 4)
     """
-		delete the remaining code *in this function* and replace it with
-		your own code. add more code to do what the assignment asks of you.
-	"""
-    from gladysUserInterface import sumFinalSat
+    try:
+        from gladysUserInterface import x2, y2
 
-    average = sumFinalSat / 4
+        altitude = satellite.gpsFinalValue(x2, y2, 'altitude')
 
-    print(average)
-    return average
+        # altitud = satValue
+
+        latitude = satellite.gpsFinalValue(x2, y2, 'latitude')
+        # latitude = satValue
+
+        longitude = satellite.gpsFinalValue(x2, y2, 'longitude')
+        # longitude = satValue
+
+        time = satellite.gpsFinalValue(x2, y2, 'time')
+        # time = satValue
+
+        sumFinalSat = (altitude + latitude + longitude + time)
+
+        average = sumFinalSat / 4
+
+        return average
+
+    except ImportError:
+
+        line = f"\n---------------------------------------------------------------------------"
+        print(line)
+        print("\nYou need to enter a FINAL destination coordenates in order to calculate the distance.\nPlease try again. ")
+        print(line)
+
+        from gladysUserInterface import userName
+        gladysUserInterface.runApp(userName)
 
 
 def distance():
-    """_summary_ Function that determines the distance between inicial and final coordenates.
+    """Function that determines the distance between inicial and final coordenates.
 
     Args:
         gpsInitialAverage: Initial avereged of the SUM of all satellites for Initial Point
         gpsFinalAverage: Final avereged of the SUM of all satellites for Final Point
 
     Returns:
-        Distance between arguments. (Squre root of the SUM os the Avereges^2)
+        Distance between Inicial and Final Average .
+        (Squre root of the SUM of the 2 the Avereges^2)
     """
 
-    from gladysUserInterface import initialAverage, finalAverage
-
+    initialAverage = gpsInitialAverage()
     initialPower = initialAverage**2
+    finalAverage = gpsFinalAverage()
     finalPower = finalAverage**2
 
     distance = math.sqrt(initialPower+finalPower)
-
-    print(round(distance, 2))
 
     return distance

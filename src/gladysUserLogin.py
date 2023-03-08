@@ -21,7 +21,7 @@ def login():
     while True:
 
         emailAddress = input(
-            "\nPlease enter an e-mail to inicialited the app: ")
+            "\nPlease enter an e-mail to initialize the app: ")
         lowerEmail = emailAddress.lower()
 
         if (is_valid_email(lowerEmail) == True):

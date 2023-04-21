@@ -1,4 +1,3 @@
-import io
 import json
 import gladysUserInterface
 """
@@ -11,7 +10,7 @@ information into data structures. Returns the data that was read to the gladysUs
 """
 
 
-def readSat(sat, pathToJSONDataFiles):
+def read_sat(sat, pathToJSONDataFiles):
     """Function that read the JSON files.
 
     Args:
@@ -26,23 +25,23 @@ def readSat(sat, pathToJSONDataFiles):
         data = The content of the JSON files.
     """
 
-    fileName = sat + "-satellite.json"
-    filePath = pathToJSONDataFiles + "/" + fileName
+    file_name = sat + "-satellite.json"
+    file_path = pathToJSONDataFiles + "/" + file_name
 
    # open the file
     try:
-        fileHandle = open(filePath)
+        file_handle = open(file_path)
     except IOError:
-        print("ERROR: Unable to open the file " + filePath)
+        print("ERROR: Unable to open the file " + file_path)
         raise IOError
 
     # read the file
-    data = json.load(fileHandle)
+    data = json.load(file_handle)
 
     return data
 
 
-def gpsInitialValue(x, y, sat):
+def gps_initial_value(x1, y1, sat):
     """Function that returns the values matching in the 4 satelites
     [altitude,latitud, longitud, time ] for the initial coordenates ('C')
 
@@ -58,24 +57,25 @@ def gpsInitialValue(x, y, sat):
     pathToJSONDataFiles = "/Users/Edgar/Documents/GitHub/West_py/src"
 
     # read the satellite data
-    data = readSat(sat, pathToJSONDataFiles)
+    data = read_sat(sat, pathToJSONDataFiles)
 
-    valueDictionary = {}
+    value_dictionary = {}
 
     for elem in data:
         x = elem['x']
         y = elem['y']
         value = elem['value']
-        valueDictionary[x, y] = value
+        value_dictionary[x, y] = value
 
-    from gladysUserInterface import x1, y1
+    gladysUserInterface.coordinate_validator(x1)
+    gladysUserInterface.coordinate_validator(y1)
 
-    for (i) in valueDictionary:
+    for (i) in value_dictionary:
         if i == (x1, y1):
-            return (valueDictionary[i])
+            return (value_dictionary[i])
 
 
-def gpsFinalValue(x, y, sat):
+def gps_final_value(x2, y2, sat):
     """Function that returns the values matching in the 4 satelites
     [altitude,latitud, longitud, time ] for the FINAL coordenates ('D')
 
@@ -90,18 +90,19 @@ def gpsFinalValue(x, y, sat):
     pathToJSONDataFiles = "/Users/Edgar/Documents/GitHub/West_py/src"
 
     # read the satellite data
-    data = readSat(sat, pathToJSONDataFiles)
+    data = read_sat(sat, pathToJSONDataFiles)
 
-    valueDictionary = {}
+    value_dictionary = {}
 
     for elem in data:
         x = elem['x']
         y = elem['y']
         value = elem['value']
-        valueDictionary[x, y] = value
+        value_dictionary[x, y] = value
 
-    from gladysUserInterface import x2, y2
+    gladysUserInterface.coordinate_validator(x2)
+    gladysUserInterface.coordinate_validator(y2)
 
-    for (i) in valueDictionary:
+    for (i) in value_dictionary:
         if i == (x2, y2):
-            return (valueDictionary[i])
+            return (value_dictionary[i])

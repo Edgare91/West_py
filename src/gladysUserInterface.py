@@ -1,4 +1,3 @@
-import io
 
 import gladysCompute as compute
 import gladysUserLogin as userLogin
@@ -8,182 +7,128 @@ import gladysUserLogin as userLogin
 	Module: gladysUserInterface
 	Description: This module does the interface and is like the glue to put all the modules working
     together / Also, it contains the menu and the runTests Function //
-
-
-
-    def runTests():
-
-            tests some module functions
-
-
-    print("running a few tests")
-
-    average = compute.gpsAverage(4, 5)
-    print("average = ", average)
-
-     delete the remaining code *in this function* and replace it with
-     your code. add more code to do what the assignment asks you to do.
-     add 3 more tests of different functions in different modules
-    print("hello!") 
-
 """
 
 
 def start():
     """ Starts the app getting the userName from the login module (lowerEmail)
     """
-    global userName
-    userName = userLogin.login()
+    user_name = userLogin.login()
 
-    runApp(userName)
+    run_app(user_name)
 
 
-def runApp(userName):
+def coordinate_validator(input):
+    """Function which validates the coordinates.
+
+    Args:
+        input: _input type str for any coordinate (x1,y1,x2,y2)_
+
+    Returns:
+        boolean. True if the coordinate is valid
+    """
+
+    try:
+        input_converted = int(input)
+
+        if isinstance(input_converted, int) == True:
+
+            if (input_converted >= 0 and input_converted <= 99) == True:
+                return input_converted
+            else:
+                print("Value out of range, please try again")
+                return False
+        else:
+            print("Invalid value, please type a WHOLE number")
+            return False
+
+    except ValueError:
+        print('You cannot enter characters')
+
+
+def run_app(user_name):
     """
     Boddy of the app / Menu / Switches cases
     """
 
     # loop until user types q
-    userQuit = False
+    user_quit = False
     # While userQuit not True still printing the Menu
-    while (not userQuit):
-
-        """
-                create a function to print your menu and simply call it here.
-        """
+    while not user_quit:
 
         print("\n--| Welcome to the Gladys West Map App |--")
-        print("         User: "+userName)
-        print('''\n
-1.- Type "C" to set current position
-2.- Type "D" to set destination position
-3.- Type "M" to calculate the distance between current & destination position
-4.- Type "Q" to quit
-		''')
-        print()
+        print("         User: "+user_name)
+        print("\n1.- Type 'C' to set current position")
+        print("2.- Type 'D' to set destination position")
+        print(
+            "3.- Type 'M' to calculate the distance between current & destination position")
+        print("4.- Type 'Q' to quit\n")
 
         # get first character of input for the menu
-        userInput = input("Enter a command: ")
-        lowerInput = userInput.lower()
-        firstChar = lowerInput[0:1]
+        user_input = input("Enter a command: ")
+        lower_input = user_input.lower()
+        first_char = lower_input[0:1]
 
-        global x1
-        global y1
-        global x2
-        global y2
-        global sumInitialSat
-        global sumFinalSat
+        if first_char == 'q':
+            user_quit = True
 
-        if firstChar == 'q':
-            userQuit = True
-
-        elif firstChar == 'c':
-
-            """ Current Position
-             Type "C" to set current position //
-            (x1,y1) values can only be from 0 to 99
-            values can only be integer values (whole numbers) //
-            output: if input is out of range "Value of out range, please try again"
-            output: if input != int, except = "Invalid value, please enter a whole number"
-            """
-
-            while True:
-                try:
-                    global x1
-                    x1 = int(
-                        input("Please enter an initial value between 0 and 99 for 'X': "))
-                    if (x1 >= 0 and x1 <= 99) == True:
-                        break
-                    else:
-                        print("Value of out range, please try again")
-                except:
-                    print("Invalid value, please enter a whole number")
-
-            while True:
-                try:
-                    global y1
-                    y1 = int(
-                        input("Please enter an initial value between 0 and 99 for 'Y': "))
-                    if (y1 >= 0 and y1 <= 99) == True:
-                        break
-                    else:
-                        print("Value of out range, please try again")
-                except:
-                    print("Invalid value, please enter a whole number")
-
+        elif first_char == 'c':
             line = f"\n------------------------------------------"
+
+            x1 = input(
+                "Please enter an initial value between 0 and 99 for 'X': ")
+            coordinate_validator(x1)
+
+            y1 = input(
+                "Please enter an initial value between 0 and 99 for 'Y': ")
+            coordinate_validator(y1)
+
             print(line)
 
-            currentString = f"\n   Your current position is X= {x1}, Y={y1}"
+            current_string = f"\n   Your current position is X= {x1}, Y={y1}"
 
-            print(currentString)
+            print(current_string)
             print(line)
 
-        elif firstChar == 'd':
-
-            """Destination position
-
-            2.- Type "D" to set destination position //
-            (x2,y2) values can only be from 0 to 99
-            values can only be integer values (whole numbers) //
-            output: if input is out of range "Value of out range, please try again"
-            output: if input != int, except = "Invalid value, please enter a whole number"
-            """
-
-            while True:
-                try:
-
-                    x2 = int(
-                        input("Please enter a final value between 0 and 99 for 'X': "))
-                    if (x2 >= 0 and x2 <= 99) == True:
-                        break
-                    else:
-                        print("Value of out range, please try again")
-                except:
-                    print("Invalid value, please enter a whole number")
-
-            while True:
-                try:
-                    y2 = int(
-                        input("Please enter a final value between 0 and 99 for 'Y': "))
-                    if (y2 >= 0 and y2 <= 99) == True:
-                        break
-                    else:
-                        print("Value of out range, please try again")
-                except:
-                    print("Invalid value, please enter a whole number")
+        elif first_char == 'd':
 
             line = f"\n------------------------------------------"
 
-            print(line)
+            x2 = input(
+                "Please enter a final value between 0 and 99 for 'X': ")
+            coordinate_validator(x2)
 
-            destinationString = f"\nYour destination position is X= " + \
-                str(x2)+", Y= "+str(y2)
-
-            print(destinationString)
-            print(line)
-
-        elif firstChar == 'm':
-
-            distance = compute.distance()
-            distanceString = f"\n        The distance is: {round(distance, 2)}"
+            y2 = input(
+                "Please enter a final value between 0 and 99 for 'Y': ")
+            coordinate_validator(y2)
 
             print(line)
+
+            destination_string = f"\n  Your destination position is X= {x2}, Y= {y2}"
+
+            print(destination_string)
+            print(line)
+
+        elif first_char == 'm':
             try:
-                print(currentString)
-                print(destinationString)
+                distance = compute.distance(x1, y1, x2, y2)
+                distance_string = f"\n        The distance is: {round(distance, 2)}"
+
+                print(line)
+                print(current_string)
+                print(destination_string)
             except UnboundLocalError:
                 line = f"\n--------------------------------------------------------------"
                 print(line)
                 print("\nPlease enter first current location, second final destination \nand finally select the option to calculate distance. \nPlease try again")
                 print(line)
-                runApp(userName)
+                run_app(user_name)
 
-            print(distanceString)
+            print(distance_string)
             print(line)
 
         else:
-            print("ERROR: " + firstChar + " is not a valid command")
+            print("ERROR: " + first_char + " is not a valid command")
 
     print("\n")
     print("Thank you for using the Gladys West Map App!")
